@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>À propos - Générateur de Motifs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('index') }}">Accueil</a>
+    <a href="{{ url_for('a_propos') }}">À propos</a>
+  </nav>
+
+  <h1>À propos du projet</h1>
+  <p>
+    Ce générateur de motifs géométriques a été réalisé dans le cadre d’un projet universitaire Python (5 ECTS).
+    Il utilise Flask pour l’interface web, Turtle pour les dessins, et Pillow pour convertir les images.
+  </p>
+  <p>
+    Réalisé avec ❤️ par un étudiant passionné de code, de géométrie et de design.
+  </p>
+  <a class="btn" href="{{ url_for('index') }}">⟵ Retour à l'accueil</a>
+</body>
+</html>
