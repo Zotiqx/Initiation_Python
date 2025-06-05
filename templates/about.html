@@ -2,24 +2,59 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>À propos - Générateur de Motifs</title>
+  <title>🧠 À propos - Projet Motif</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <nav>
-    <a href="{{ url_for('index') }}">Accueil</a>
-    <a href="{{ url_for('a_propos') }}">À propos</a>
+    <div class="logo">🕹 MOTIF 8-BIT</div>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">[ACCUEIL]</a>
+      <a href="{{ url_for('a_propos') }}">[À PROPOS]</a>
+    </div>
   </nav>
 
-  <h1>À propos du projet</h1>
-  <p>
-    Ce générateur de motifs géométriques a été réalisé dans le cadre d’un projet universitaire Python (5 ECTS).
-    Il utilise Flask pour l’interface web, Turtle pour les dessins, et Pillow pour convertir les images.
-  </p>
-  <p>
-    Réalisé avec ❤️ par un étudiant passionné de code, de géométrie et de design.
-  </p>
-  <a class="btn" href="{{ url_for('index') }}">⟵ Retour à l'accueil</a>
+  <main>
+    <section class="header">
+      <h1>&gt; À propos du projet</h1>
+      <p>Ce projet est une application web développée en Python qui permet de générer dynamiquement des motifs géométriques via une interface simple et rétro.</p>
+    </section>
+
+    <section class="form-container">
+      <h2>:: Fonctionnement</h2>
+      <p>
+        L'app utilise <strong>Turtle</strong> pour dessiner un motif en boucle, avec rotation à chaque tour, selon les paramètres entrés par l'utilisateur.
+      </p>
+
+      <h2>:: Outils</h2>
+      <ul>
+        <li><strong>Python</strong> - code principal</li>
+        <li><strong>Flask</strong> - web</li>
+        <li><strong>Turtle</strong> - dessins</li>
+        <li><strong>Pillow</strong> - conversion image</li>
+        <li><strong>HTML/CSS</strong> - affichage</li>
+      </ul>
+
+      <h2>:: Paramètres</h2>
+      <ul>
+        <li>nb_cotes : côtés du polygone</li>
+        <li>profondeur : nb de répétitions</li>
+        <li>taille : longueur des lignes</li>
+        <li>angle : rotation entre chaque forme</li>
+        <li>couleur : nom FR ou code hexa</li>
+      </ul>
+
+      <h2>:: Visuel</h2>
+      <img src="{{ url_for('static', filename='visualisation_motif.png') }}" alt="visuel" style="margin: 1rem 0; max-width: 100%;">
+
+      <h2>:: Objectif</h2>
+      <p>Projet Python universitaire (5 ECTS), avec logique géométrique, UI, web et rendering dynamique.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© MOTIF 8-BIT - Projet Python Retro-Gaming 2025</p>
+  </footer>
 </body>
 </html>
