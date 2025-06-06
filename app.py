@@ -1,14 +1,20 @@
 import os
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, session
 from motif_generator import generer_motif
 
 app = Flask(__name__)
+app.secret_key = 'super_secret_key'
 UPLOAD_FOLDER = 'static/motifs'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/')
+def accueil():
+    return render_template('accueil.html')
+
+
+@app.route('/generateur', methods=['GET', 'POST'])
 def index():
-    image_path = None
     if request.method == 'POST':
         try:
             nb_cotes = int(request.form['nb_cotes'])
@@ -17,10 +23,14 @@ def index():
             angle = float(request.form['angle'])
             couleur = request.form['couleur']
             filename = generer_motif(nb_cotes, profondeur, taille, angle, couleur)
-            image_path = url_for('static', filename=f'motifs/{filename}')
+            session['image_path'] = url_for('static', filename=f'motifs/{filename}')
+            return redirect(url_for('index'))
         except Exception as e:
             return render_template('index.html', error=str(e))
+    
+    image_path = session.pop('image_path', None)
     return render_template('index.html', image_path=image_path)
+
 
 @app.route('/a-propos')
 def a_propos():
@@ -28,5 +38,3 @@ def a_propos():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-

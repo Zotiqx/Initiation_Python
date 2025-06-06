@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenue - Motif 8-BIT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='accueil.css') }}">
+</head>
+<body>
+  <div class="boot-screen">
+    <div class="boot-text">
+      <p>> PROJET TERMINAL GEOMETRIQUE</p>
+      <p>> Initialisation des motifs...</p>
+      <p>> Système de génération chargé ✅</p>
+      <p class="blinker">>>> CLIQUE POUR COMMENCER</p>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.boot-screen').addEventListener('click', () => {
+      window.location.href = "{{ url_for('index') }}";
+    });
+  </script>
+</body>
+</html>
