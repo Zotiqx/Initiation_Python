@@ -35,21 +35,15 @@
         <div class="error">ERREUR: {{ error }}</div>
       {% endif %}
 
-      {% if image_path %}
-      <div class="image-container">
-        <h2>:: MOTIF GÉNÉRÉ</h2>
-        <img src="{{ image_path }}" alt="Motif généré">
-      </div>
-      {% endif %}
-    </section>
-
-    {% if image_path %}
+          {% if image_path %}
 <section class="image-container">
   <h2>:: MOTIF GÉNÉRÉ</h2>
   <img src="{{ image_path }}" alt="Motif généré">
   <a href="{{ image_path }}" download class="download-btn">[ TÉLÉCHARGER LE MOTIF ]</a>
 </section>
 {% endif %}
+    </section>
+
 
   </main>
 
