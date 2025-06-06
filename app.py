@@ -30,6 +30,3 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-@app.route('/a-propos')
-def a_propos():
-    return render_template('about.html')

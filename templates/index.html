@@ -43,14 +43,14 @@
       {% endif %}
     </section>
 
-    <section class="visualisation">
-      <details>
-        <summary>&#9654; INFO TECHNIQUE</summary>
-        <p>Schéma explicatif du système de génération :</p>
-        <img src="{{ url_for('static', filename='visualisation_motif.png') }}" alt="Schéma explicatif">
-        <p>Chaque motif est formé par la rotation d’un polygone sur un axe fixe avec un angle déterminé.</p>
-      </details>
-    </section>
+    {% if image_path %}
+<section class="image-container">
+  <h2>:: MOTIF GÉNÉRÉ</h2>
+  <img src="{{ image_path }}" alt="Motif généré">
+  <a href="{{ image_path }}" download class="download-btn">[ TÉLÉCHARGER LE MOTIF ]</a>
+</section>
+{% endif %}
+
   </main>
 
   <footer>

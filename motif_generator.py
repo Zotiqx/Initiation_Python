@@ -1,8 +1,7 @@
-import turtle
 import os
-import time
+import matplotlib.pyplot as plt
 from datetime import datetime
-from PIL import Image
+import math
 
 COULEURS_FR = {
     "rouge": "red",
@@ -23,34 +22,31 @@ def generer_motif(nb_cotes, profondeur, taille, angle, couleur):
     couleur = couleur.strip().lower()
     couleur = COULEURS_FR.get(couleur, couleur)
 
-    screen = turtle.Screen()
-    screen.bgcolor("white")
-    turtle_obj = turtle.Turtle()
-    turtle_obj.hideturtle()
-    turtle_obj.speed(0)
-    turtle_obj.color(couleur)
+    fig, ax = plt.subplots()
+    ax.set_aspect('equal')
+    ax.axis('off')
 
-    def dessiner_repetition(n):
-        for _ in range(profondeur):
-            for _ in range(n):
-                turtle_obj.forward(taille)
-                turtle_obj.right(360 / n)
-            turtle_obj.right(angle)
+    x, y = 0, 0
+    direction = 0  # angle en degrés
 
-    dessiner_repetition(nb_cotes)
+    points = []
 
-    filename = f"motif_{datetime.now().strftime('%Y%m%d%H%M%S')}.eps"
-    eps_path = os.path.join("static/motifs", filename)
-    canvas = screen.getcanvas()
-    canvas.postscript(file=eps_path)
+    for _ in range(profondeur):
+        for _ in range(nb_cotes):
+            rad = math.radians(direction)
+            new_x = x + taille * math.cos(rad)
+            new_y = y + taille * math.sin(rad)
+            points.append(((x, y), (new_x, new_y)))
+            x, y = new_x, new_y
+            direction += 360 / nb_cotes
+        direction += angle
 
-    turtle_obj.clear()
-    screen.bye()
-    time.sleep(0.5)
+    for start, end in points:
+        ax.plot([start[0], end[0]], [start[1], end[1]], color=couleur, linewidth=1)
 
-    img = Image.open(eps_path)
-    png_filename = filename.replace(".eps", ".png")
-    img.save(os.path.join("static/motifs", png_filename))
-    os.remove(eps_path)
+    nom_fichier = f"motif_{datetime.now().strftime('%Y%m%d%H%M%S')}.png"
+    chemin = os.path.join("static/motifs", nom_fichier)
+    plt.savefig(chemin, bbox_inches='tight', pad_inches=0, dpi=200)
+    plt.close(fig)
 
-    return png_filename
+    return nom_fichier
