@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>🧠 À propos - Projet Motif</title>
+  <title>🧠 À propos - PolyDraw</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <nav>
-    <div class="logo">🕹 MOTIF 8-BIT</div>
+    <div class="logo">🧮 PolyDraw</div>
     <div class="nav-links">
       <a href="{{ url_for('index') }}">[ACCUEIL]</a>
       <a href="{{ url_for('a_propos') }}">[À PROPOS]</a>
@@ -17,44 +17,44 @@
 
   <main>
     <section class="header">
-      <h1>&gt; À propos du projet</h1>
-      <p>Ce projet est une application web développée en Python qui permet de générer dynamiquement des motifs géométriques via une interface simple et rétro.</p>
+      <h1>&gt; À propos</h1>
+      <p>PolyDraw est une application web qui permet de générer dynamiquement des motifs géométriques via une interface rétro stylisée.</p>
     </section>
 
     <section class="form-container">
       <h2>:: Fonctionnement</h2>
       <p>
-        L'app utilise <strong>Turtle</strong> pour dessiner un motif en boucle, avec rotation à chaque tour, selon les paramètres entrés par l'utilisateur.
+        L'app utilise <strong>Turtle</strong> pour dessiner un motif en boucle, avec rotation à chaque tour, selon les paramètres entrés.
       </p>
 
       <h2>:: Outils</h2>
       <ul>
-        <li><strong>Python</strong> - code principal</li>
-        <li><strong>Flask</strong> - web</li>
-        <li><strong>Turtle</strong> - dessins</li>
-        <li><strong>Pillow</strong> - conversion image</li>
-        <li><strong>HTML/CSS</strong> - affichage</li>
+        <li><strong>Python</strong> - logique principale</li>
+        <li><strong>Flask</strong> - serveur web</li>
+        <li><strong>Turtle</strong> - dessin</li>
+        <li><strong>Pillow</strong> - conversion PNG</li>
+        <li><strong>HTML/CSS</strong> - rendu visuel</li>
       </ul>
 
       <h2>:: Paramètres</h2>
       <ul>
         <li>nb_cotes : côtés du polygone</li>
-        <li>profondeur : nb de répétitions</li>
+        <li>profondeur : répétitions</li>
         <li>taille : longueur des lignes</li>
-        <li>angle : rotation entre chaque forme</li>
-        <li>couleur : nom FR ou code hexa</li>
+        <li>angle : rotation entre chaque itération</li>
+        <li>couleur : en français ou hexadécimal</li>
       </ul>
 
       <h2>:: Visuel</h2>
       <img src="{{ url_for('static', filename='visualisation_motif.png') }}" alt="visuel" style="margin: 1rem 0; max-width: 100%;">
 
       <h2>:: Objectif</h2>
-      <p>Projet Python universitaire (5 ECTS), avec logique géométrique, UI, web et rendering dynamique.</p>
+      <p>Projet Python universitaire (5 ECTS), géométrie, interface, génération dynamique.</p>
     </section>
   </main>
 
   <footer>
-    <p>© MOTIF 8-BIT - Projet Python Retro-Gaming 2025</p>
+    <p>© PolyDraw - Projet Python CIN2 S4</p>
   </footer>
 </body>
 </html>

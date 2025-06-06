@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>🎮 Terminal Geo-Motif</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  </head>
-  <body>
-    <nav>
-      <div class="logo">🕹 MOTIF 8-BIT</div>
-      <div class="nav-links">
-        <a href="{{ url_for('index') }}">[ACCUEIL]</a>
-        <a href="{{ url_for('a_propos') }}">[À PROPOS]</a>
+<head>
+  <meta charset="UTF-8">
+  <title>🎮 PolyDraw - Générateur de motifs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+    <div class="logo">🧮 PolyDraw</div>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">[ACCUEIL]</a>
+      <a href="{{ url_for('a_propos') }}">[À PROPOS]</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="header">
+      <h1>&gt; Générateur de Motifs</h1>
+      <p>Utilise la géométrie pour créer ton propre art rétro.</p>
+    </section>
+
+    <section class="form-container">
+      <form method="POST">
+        <input type="number" name="nb_cotes" placeholder="NOMBRE DE CÔTÉS" required>
+        <input type="number" name="profondeur" placeholder="PROFONDEUR" required>
+        <input type="number" name="taille" placeholder="TAILLE" required>
+        <input type="number" step="any" name="angle" placeholder="ANGLE DE ROTATION" required>
+        <input type="text" name="couleur" placeholder="COULEUR (ex: rouge, vert, #00FF00)" required>
+        <button type="submit">[GÉNÉRER]</button>
+      </form>
+
+      {% if error %}
+        <div class="error">ERREUR: {{ error }}</div>
+      {% endif %}
+
+      {% if image_path %}
+      <div class="image-container">
+        <h2>:: MOTIF GÉNÉRÉ</h2>
+        <img src="{{ image_path }}" alt="Motif généré">
+        <a href="{{ image_path }}" download><button>TÉLÉCHARGER</button></a>
       </div>
-    </nav>
+      {% endif %}
+    </section>
 
-    <main>
-      <section class="header">
-        <h1>&gt; Générateur de Motifs</h1>
-        <p>Utilise la géométrie pour créer ton propre art rétro.</p>
-      </section>
+    <section class="visualisation">
+      <details>
+        <summary>&#9654; INFO TECHNIQUE</summary>
+        <p>Schéma explicatif du système de génération :</p>
+        <img src="{{ url_for('static', filename='visualisation_motif.png') }}" alt="Schéma explicatif">
+        <p>Chaque motif est formé par la rotation d’un polygone sur un axe fixe avec un angle déterminé.</p>
+      </details>
+    </section>
+  </main>
 
-      <section class="form-container">
-        <form method="POST">
-          <input type="number" name="nb_cotes" placeholder="NOMBRE DE CÔTÉS" required />
-          <input type="number" name="profondeur" placeholder="PROFONDEUR" required />
-          <input type="number" name="taille" placeholder="TAILLE" required />
-          <input type="number" step="any" name="angle" placeholder="ANGLE DE ROTATION" required />
-          <input type="text" name="couleur" placeholder="COULEUR (ex: rouge, vert, #00FF00)" required />
-          <button type="submit">[GÉNÉRER]</button>
-        </form>
-
-        {% if error %}
-          <div class="error">ERREUR: {{ error }}</div>
-        {% endif %}
-
-        {% if image_path %}
-          <section class="image-container">
-            <h2>:: MOTIF GÉNÉRÉ</h2>
-            <img src="{{ image_path }}" alt="Motif généré" />
-            <a href="{{ image_path }}" download class="download-btn">[ TÉLÉCHARGER LE MOTIF ]</a>
-          </section>
-        {% endif %}
-      </section>
-    </main>
-
-    <footer>
-      <p>© MOTIF 8-BIT - Projet Python Retro-Gaming 2025</p>
-    </footer>
-  </body>
+  <footer>
+    <p>© PolyDraw - Projet Python CIN2 S4</p>
+  </footer>
+</body>
 </html>
