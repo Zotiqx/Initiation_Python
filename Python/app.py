@@ -26,10 +26,10 @@ def index():
             session['image_path'] = url_for('static', filename=f'motifs/{filename}')
             return redirect(url_for('index'))
         except Exception as e:
-            return render_template('index.html', error=str(e))
+            return render_template('generateur.html', error=str(e))
     
     image_path = session.pop('image_path', None)
-    return render_template('index.html', image_path=image_path)
+    return render_template('generateur.html', image_path=image_path)
 
 
 @app.route('/a-propos')
