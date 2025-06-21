@@ -50,7 +50,14 @@ def generateur():
 
 @app.route('/historique')
 def historique():
-    return render_template('historique.html')
+    chemin = os.path.join('static', 'motifs')
+    fichiers = sorted(
+        [f for f in os.listdir(chemin) if f.endswith('.png')],
+        key=lambda x: os.path.getmtime(os.path.join(chemin, x)),
+        reverse=True
+    )
+    return render_template('historique.html', fichiers=fichiers)
+
 
 @app.route('/a-propos')
 def a_propos():
