@@ -81,6 +81,16 @@ nav {
   border: 2px solid #00ff00;
   image-rendering: pixelated;
   display: block;
+  margin: 0 auto;
+}
+
+.motif-name {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.6rem;
+  margin: 0.5rem 0;
 }
 
 .download-button {
