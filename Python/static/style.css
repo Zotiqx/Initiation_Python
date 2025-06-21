@@ -38,6 +38,20 @@ nav {
   text-decoration: underline;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #00FF00;
+}
+
+.logo img {
+  height: 30px;
+  width: auto;
+  image-rendering: pixelated;
+}
+
 main {
   flex: 1;
   padding: 2rem;
@@ -190,103 +204,6 @@ body::before {
   background-color: #000;
   color: #00FF00;
 }
-
-
-
-/* PAGE ACCUEIL EFFETS */
-
-.accueil-page {
-  position: relative;
-  overflow: hidden;
-}
-
-.tv-overlay::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(0, 255, 0, 0.05) 0px,
-    rgba(0, 255, 0, 0.05) 1px,
-    transparent 1px,
-    transparent 4px
-  );
-  z-index: 0;
-  pointer-events: none;
-  animation: flicker 0.2s infinite;
-}
-
-@keyframes flicker {
-  0% { opacity: 0.9; }
-  50% { opacity: 0.7; }
-  100% { opacity: 0.9; }
-}
-
-.accueil-container {
-  text-align: center;
-  margin-top: 8rem;
-  z-index: 1;
-  position: relative;
-}
-
-.intro-text {
-  font-size: 0.75rem;
-  color: #00FF00;
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto 2rem auto;
-  animation: typing 4s steps(40) 1 normal both;
-  white-space: pre-wrap;
-  overflow: hidden;
-  border-left: 2px solid #00FF00;
-  padding-left: 10px;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-.start-button {
-  font-family: 'Press Start 2P', monospace;
-  background-color: #000;
-  border: 2px solid #00FF00;
-  color: #00FF00;
-  padding: 1rem 2rem;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  animation: blink 1s step-start infinite;
-  box-shadow: 0 0 10px #00FF00;
-  transition: background 0.3s;
-}
-
-.start-button:hover {
-  background-color: #00FF00;
-  color: #000;
-}
-
-@keyframes blink {
-  50% { opacity: 0.2; }
-}
-
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  color: #00FF00;
-}
-
-.logo img {
-  height: 30px;
-  width: auto;
-  image-rendering: pixelated;
-}
-
-
 
 @media screen and (max-width: 768px) {
   nav {

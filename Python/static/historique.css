@@ -26,6 +26,13 @@ nav {
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #00ff00;
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .nav-links a {
@@ -72,6 +79,7 @@ nav {
   width: 200px;
   text-align: center;
   font-family: 'Press Start 2P', monospace;
+  flex-shrink: 0;
 }
 
 .motif-block img {
@@ -119,4 +127,56 @@ footer {
   border-top: 1px solid #00FF00;
   background-color: #111;
   color: #33FF33;
+}
+
+
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    margin-top: 10px;
+    justify-content: flex-start;
+  }
+
+  .motif-block {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .motif-block img {
+    width: 100%;
+    height: auto;
+  }
+
+  .download-button {
+    width: 100%;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 0.7rem;
+  }
+
+  .nav-links a {
+    font-size: 0.5rem;
+  }
+
+  .motif-block {
+    padding: 0.5rem;
+  }
+
+  .download-button {
+    padding: 8px 10px;
+    font-size: 0.6rem;
+  }
+
+  .motif-name {
+    font-size: 0.5rem;
+  }
 }
