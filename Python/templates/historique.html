@@ -28,7 +28,7 @@
           <div class="motif-block">
             <img src="{{ url_for('static', filename='motifs/' + f) }}" alt="{{ f }}">
             <p>{{ f }}</p>
-            <a href="{{ url_for('static', filename='motifs/' + f) }}" download>Télécharger</a>
+            <a href="{{ url_for('static', filename='motifs/' ~ motif) }}" download class="download-button">Télécharger</a>
           </div>
         {% endfor %}
       </div>
