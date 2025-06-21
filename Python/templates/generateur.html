@@ -31,8 +31,8 @@
           <input type="number" name="taille" placeholder="TAILLE" required />
           <input type="number" step="any" name="angle" placeholder="ANGLE DE ROTATION" required />
           <div class="color-inputs">
-            <input type="text" name="couleur" placeholder="COULEUR (nom ou code hex)" required>
-            <input type="color" name="picker" value="#00ff00" onchange="document.querySelector('input[name=couleur]').value = this.value">
+            <input type="text" name="couleur" placeholder="COULEUR" required />
+            <input type="color" name="picker" value="#00ff00" onchange="document.querySelector('input[name=couleur]').value = this.value" />
           </div>
 
           <button type="submit">[GÉNÉRER]</button>
@@ -46,14 +46,20 @@
           <div class="image-container">
             <h2>:: MOTIF GÉNÉRÉ</h2>
             <img src="{{ image_path }}" alt="Motif généré" />
-            <a href="{{ image_path }}" download><button>TÉLÉCHARGER</button></a>
+            <form method="POST">
+              <input type="hidden" name="nom_fichier_existant" value="{{ generated_filename }}" />
+              <input type="text" name="nom_nouveau" placeholder="Nom du fichier" />
+              <button type="submit">Renommer</button>
+            </form>
+
+            <a href="{{ image_path }}" download><button type="button">Télécharger</button></a>
           </div>
         {% endif %}
       </section>
     </main>
 
     <footer>
-      <p>© PolyDraw - Projet Python CIN2 S4</p>
+      <p>PolyDraw - Projet Python CIN2 S4</p>
     </footer>
   </body>
 </html>
