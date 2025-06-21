@@ -14,7 +14,7 @@ def accueil():
 
 
 @app.route('/generateur', methods=['GET', 'POST'])
-def index():
+def generateur():
     if request.method == 'POST':
         if 'nom_fichier_existant' in request.form:
             ancien_nom = request.form['nom_fichier_existant']
@@ -28,7 +28,7 @@ def index():
                     os.rename(ancien_chemin, nouveau_chemin)
                     session['image_path'] = url_for('static', filename=f'motifs/{nouveau_fichier}')
                     session['generated_filename'] = nouveau_fichier
-                    return redirect(url_for('index'))
+                    return redirect(url_for('generateur'))
         else:
             try:
                 nb_cotes = int(request.form['nb_cotes'])
@@ -39,7 +39,7 @@ def index():
                 filename = generer_motif(nb_cotes, profondeur, taille, angle, couleur)
                 session['image_path'] = url_for('static', filename=f'motifs/{filename}')
                 session['generated_filename'] = filename
-                return redirect(url_for('index'))
+                return redirect(url_for('generateur'))
             
             except Exception as e:
                 return render_template('generateur.html', error=str(e))
@@ -48,7 +48,9 @@ def index():
     generated_filename = session.pop('generated_filename', None)
     return render_template('generateur.html', image_path=image_path, generated_filename=generated_filename)
 
-
+@app.route('/historique')
+def historique():
+    return render_template('historique.html')
 
 @app.route('/a-propos')
 def a_propos():
