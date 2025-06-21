@@ -30,7 +30,10 @@
           <input type="number" name="répétition" placeholder="REPETITION" required />
           <input type="number" name="taille" placeholder="TAILLE" required />
           <input type="number" step="any" name="angle" placeholder="ANGLE DE ROTATION" required />
-          <input type="text" name="couleur" placeholder="COULEUR (ex: rouge, vert, bleu ...)" required />
+          <div class="color-inputs">
+            <input type="text" name="couleur" placeholder="COULEUR" required>
+            <input type="color" name="picker" value="#00ff00" onchange="document.querySelector('input[name=couleur]').value = this.value">
+          </div>
           <button type="submit">[GÉNÉRER]</button>
         </form>
 
