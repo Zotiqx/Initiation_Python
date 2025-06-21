@@ -31,9 +31,10 @@
           <input type="number" name="taille" placeholder="TAILLE" required />
           <input type="number" step="any" name="angle" placeholder="ANGLE DE ROTATION" required />
           <div class="color-inputs">
-            <input type="text" name="couleur" placeholder="COULEUR" required>
+            <input type="text" name="couleur" placeholder="COULEUR (nom ou code hex)" required>
             <input type="color" name="picker" value="#00ff00" onchange="document.querySelector('input[name=couleur]').value = this.value">
           </div>
+
           <button type="submit">[GÉNÉRER]</button>
         </form>
 
