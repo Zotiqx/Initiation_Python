@@ -18,54 +18,6 @@
       </div>
     </nav>
 
-    <main>
-      <section class="header">
-        <h1>&gt; À propos</h1>
-        <p>PolyDraw est une application web qui permet de générer dynamiquement des motifs géométriques via une interface rétro stylisée.</p>
-      </section>
-
-      <section class="form-container">
-        <h2>:: Fonctionnement</h2>
-        <p>
-          L'app utilise <strong>Turtle</strong> pour dessiner un motif en boucle, avec rotation à chaque tour, selon les paramètres entrés.
-        </p>
-
-        <h2>:: Outils</h2>
-        <ul>
-          <li>
-            <strong>Python</strong> - logique principale
-          </li>
-          <li>
-            <strong>Flask</strong> - serveur web
-          </li>
-          <li>
-            <strong>Turtle</strong> - dessin
-          </li>
-          <li>
-            <strong>Pillow</strong> - conversion PNG
-          </li>
-          <li>
-            <strong>HTML/CSS</strong> - rendu visuel
-          </li>
-        </ul>
-
-        <h2>:: Paramètres</h2>
-        <ul>
-          <li>nb_cotes : côtés du polygone</li>
-          <li>profondeur : répétitions</li>
-          <li>taille : longueur des lignes</li>
-          <li>angle : rotation entre chaque itération</li>
-          <li>couleur : en français ou hexadécimal</li>
-        </ul>
-
-        <h2>:: Visuel</h2>
-        <img src="{{ url_for('static', filename='visualisation_motif.png') }}" alt="visuel" style="margin: 1rem 0; max-width: 100%;" />
-
-        <h2>:: Objectif</h2>
-        <p>Projet Python universitaire (5 ECTS), géométrie, interface, génération dynamique.</p>
-      </section>
-    </main>
-
     <footer>
       <p>© PolyDraw - Projet Python CIN2 S4</p>
     </footer>
