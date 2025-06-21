@@ -62,6 +62,7 @@ nav {
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .motif-block {
@@ -109,4 +110,13 @@ nav {
 .download-button:hover {
   background-color: #00FF00;
   color: #000;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.6rem;
+  padding: 1rem;
+  border-top: 1px solid #00FF00;
+  background-color: #111;
+  color: #33FF33;
 }
