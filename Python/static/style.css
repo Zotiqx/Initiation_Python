@@ -125,6 +125,42 @@ button:hover {
   cursor: pointer;
 }
 
+.type-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  font-family: 'Press Start 2P', monospace;
+  color: #00FF00;
+  font-size: 0.7rem;
+}
+
+.type-selector label {
+  display: inline-block;
+}
+
+.type-selector select {
+  background-color: #111;
+  color: #00FF00;
+  border: 2px solid #00FF00;
+  padding: 0.5rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  appearance: none;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.type-selector select:hover,
+.type-selector select:focus {
+  background-color: #00FF00;
+  color: #000;
+}
+
+.type-selector select option {
+  background-color: #000;
+  color: #00FF00;
+}
 
 .image-container {
   margin-top: 2rem;

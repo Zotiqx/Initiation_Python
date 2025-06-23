@@ -37,11 +37,14 @@
             <input type="color" name="picker" value="#00ff00" onchange="document.querySelector('input[name=couleur]').value = this.value" />
           </div>
 
-          <select name="type_motif" required>
-            <option value="polygon">Polygone</option>
+          <div class="type-selector">
+            <label for="type_motif">Type de motif :</label>
+            <select name="type_motif" id="type_motif" required>
+              <option value="polygon">Polygone</option>
               <option value="spiral">Spirale</option>
-              <option value="koch">Fractale </option>
+              <option value="koch">Fractale</option>
             </select>
+          </div>
 
           <button type="submit">[GÉNÉRER]</button>
         </form>
