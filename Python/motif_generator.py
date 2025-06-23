@@ -1,5 +1,7 @@
 import os
 import math
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from datetime import datetime
 
@@ -38,9 +40,8 @@ def generer_motif(nb_cotes, profondeur, taille, angle, couleur, type_motif="poly
                 x, y = nx, ny
                 dir_deg += 360 / nb_cotes
             dir_deg += angle
-        for (x1,y1),(x2,y2) in segments:
-            ax.plot([x1,x2],[y1,y2], color=couleur)
-
+        for (x1, y1), (x2, y2) in segments:
+            ax.plot([x1, x2], [y1, y2], color=couleur)
 
     def draw_spiral():
         x, y, dir_deg = 0, 0, 0
@@ -55,11 +56,41 @@ def generer_motif(nb_cotes, profondeur, taille, angle, couleur, type_motif="poly
             x, y = nx, ny
             dir_deg += angle
             length += inc
-        for (x1,y1),(x2,y2) in segments:
-            ax.plot([x1,x2],[y1,y2], color=couleur)
+        for (x1, y1), (x2, y2) in segments:
+            ax.plot([x1, x2], [y1, y2], color=couleur)
+
+    def draw_fractale():
+        def fractale_seq(length, depth):
+            if depth == 0:
+                return [(length, 0)]
+            seq = []
+            seq += fractale_seq(length/3, depth-1)
+            seq.append((0, 60))
+            seq += fractale_seq(length/3, depth-1)
+            seq.append((0, -120))
+            seq += fractale_seq(length/3, depth-1)
+            seq.append((0, 60))
+            seq += fractale_seq(length/3, depth-1)
+            return seq
+
+        segments = []
+        x, y, dir_deg = 0, 0, 0
+        for _ in range(3):
+            for length, turn in fractale_seq(taille, profondeur):
+                rad = math.radians(dir_deg)
+                nx = x + length * math.cos(rad)
+                ny = y + length * math.sin(rad)
+                segments.append(((x, y), (nx, ny)))
+                x, y = nx, ny
+                dir_deg += turn
+            dir_deg += 120
+        for (x1, y1), (x2, y2) in segments:
+            ax.plot([x1, x2], [y1, y2], color=couleur)
 
     if type_motif == "spiral":
         draw_spiral()
+    elif type_motif == "fractale":
+        draw_fractale()
     else:
         draw_polygon()
 
