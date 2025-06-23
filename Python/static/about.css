@@ -52,12 +52,14 @@ nav {
   gap: 10px;
   font-size: 0.9rem;
   color: #00FF00;
+  text-decoration: none;
 }
 
 .logo img {
   height: 30px;
   width: auto;
   image-rendering: pixelated;
+  text-decoration: none;
 }
 
 footer {
@@ -71,4 +73,65 @@ footer {
   border-top: 1px solid #00FF00;
   background-color: #111;
   color: #33FF33;
+}
+
+/* Styles améliorés pour la page À propos */
+.about-container {
+  flex: 1;
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.about-container section {
+  background: rgba(17, 17, 17, 0.8);
+  border: 1px solid #00FF00;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.about-container h1,
+.about-container h2 {
+  color: #33FF33;
+  text-shadow: 0 0 4px #00FF00;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.about-container p,
+.about-container li {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.about-container ul,
+.about-container ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-container ul li::marker,
+.about-container ol li::marker {
+  color: #00FF00;
+}
+
+@media (max-width: 600px) {
+  .about-container {
+    padding: 1rem;
+  }
+  .about-container section {
+    padding: 1rem;
+  }
+  .about-container h1 {
+    font-size: 1.4rem;
+  }
+  .about-container h2 {
+    font-size: 1.1rem;
+  }
+  .about-container p,
+  .about-container li {
+    font-size: 0.75rem;
+  }
 }

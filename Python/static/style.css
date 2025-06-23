@@ -44,12 +44,14 @@ nav {
   gap: 10px;
   font-size: 0.9rem;
   color: #00FF00;
+  text-decoration: none;
 }
 
 .logo img {
   height: 30px;
   width: auto;
   image-rendering: pixelated;
+  text-decoration: none;
 }
 
 main {

@@ -9,10 +9,11 @@
   </head>
   <body>
     <nav>
-      <div class="logo">
+      <a href="{{ url_for('accueil') }}" class="logo">
         <img src="{{ url_for('static', filename='logo.png') }}" alt="PolyDraw logo" />
         <span>PolyDraw</span>
-      </div>
+      </a>
+
       <div class="nav-links">
         <a href="{{ url_for('generateur') }}">[GENERATEUR]</a>
         <a href="{{ url_for('historique') }}">[HISTORIQUE]</a>

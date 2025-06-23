@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Bienvenue - PolyDraw</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='accueil.css') }}" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}">
-  </head>
-  <body class="accueil-page">
-    <div class="tv-overlay"></div>
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenue - PolyDraw</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='accueil.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}" />
+</head>
+<body class="accueil-page">
+  <div class="tv-overlay"></div>
 
-    <nav>
-      <div class="logo">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="PolyDraw logo" />
-        <span>PolyDraw</span>
-      </div>
-      <div class="nav-links">
-        <a href="{{ url_for('generateur') }}">[COMMENCER]</a>
-      </div>
-    </nav>
+  <nav>
+    <a href="{{ url_for('accueil') }}" class="logo">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="PolyDraw logo" />
+      <span>PolyDraw</span>
+    </a>
+    <div class="nav-links">
+      <a href="{{ url_for('generateur') }}">[COMMENCER]</a>
+    </div>
+  </nav>
 
-    <main class="accueil-container">
-      <pre class="intro-text">&gt; Chargement de l'interface... &gt; Initialisation des pixels... &gt; Bienvenue dans PolyDraw : ton générateur de motifs géométriques</pre>
+  <main class="accueil-container">
+    <pre class="intro-text">
+                &gt; Chargement de l'interface...
+                &gt; Initialisation des pixels...
+                &gt; Bienvenue dans PolyDraw : ton générateur de motifs géométriques
+    </pre>
 
-      <a href="{{ url_for('generateur') }}"><button class="start-button">▶ PRESS START</button></a>
-    </main>
+    <a href="{{ url_for('generateur') }}"><button class="start-button">▶ PRESS START</button></a>
+  </main>
 
-    <footer>
-      <p>PolyDraw – Projet Python CIN2 S4</p>
-    </footer>
-  </body>
+  <footer>
+    <p>PolyDraw – Projet Python CIN2 S4</p>
+  </footer>
+</body>
 </html>

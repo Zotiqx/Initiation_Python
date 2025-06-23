@@ -2,26 +2,74 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>À propos - PolyDraw</title>
+    <title>PolyDraw - À propos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}" />
   </head>
   <body>
     <nav>
-      <div class="logo">
+      <a href="{{ url_for('accueil') }}" class="logo">
         <img src="{{ url_for('static', filename='logo.png') }}" alt="PolyDraw logo" />
         <span>PolyDraw</span>
-      </div>
+      </a>
       <div class="nav-links">
-        <a href="{{ url_for('generateur') }}">[GENERATEUR]</a>
+        <a href="{{ url_for('generateur') }}">[GÉNÉRATEUR]</a>
         <a href="{{ url_for('historique') }}">[HISTORIQUE]</a>
         <a href="{{ url_for('a_propos') }}">[À PROPOS]</a>
       </div>
     </nav>
 
+    <main class="about-container">
+      <section>
+        <h1>&gt; À propos de PolyDraw</h1>
+        <p>PolyDraw est un générateur de motifs géométriques rétro en ligne, développé en Python avec Flask. L’utilisateur définit des paramètres et obtient instantanément un motif dessiné en back‑end grâce à Matplotlib.</p>
+      </section>
+
+      <section>
+        <h2>:: Fonctionnement</h2>
+        <p>Le site propose trois types de motifs :</p>
+        <ul>
+          <li><strong>Polygone</strong> : un polygone régulier (1 à 100 côtés) est tracé en boucle, avec rotation à chaque itération.</li>
+          <li><strong>Spirale</strong> : une spirale archimédienne s’enroule autour d’un point central, avec incréments de longueur et rotation définis.</li>
+          <li><strong>Fractale</strong> : un flocon de Koch, fractale auto‑similaire, généré récursivement.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>:: Paramètres</h2>
+        <ul>
+          <li><strong>nb_cotes</strong> : nombre de côtés du polygone (1 – 100).</li>
+          <li><strong>répétition</strong> : profondeur ou nombre d’itérations (1 – 100, limité à 6 pour la fractale).</li>
+          <li><strong>taille</strong> : longueur initiale en pixels (1 – 300).</li>
+          <li><strong>angle</strong> : angle de rotation entre chaque étape (0° – 360°).</li>
+          <li><strong>couleur</strong> : nom en français ou code hexadécimal.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>:: Limites appliquées</h2>
+        <p>Pour garantir des performances stables et éviter de sortir du cadre de dessin :</p>
+        <ul>
+          <li>Polygones et spirales : répétitions jusqu’à 100.</li>
+          <li>Fractale : répétitions limitées à 6. Cela permet de ne pas surcharger le serveur.</li>
+          <li>Taille maximale : 300 pixels pour que le motif reste visible.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>:: Pourquoi ces choix ?</h2>
+        <p>Ces bornes ont été définies pour :</p>
+        <ol>
+          <li>Assurer un temps de génération raisonnable.</li>
+          <li>Empêcher le motif de dépasser les limites de l’espace réservé.</li>
+          <li>Maintenir une expérience utilisateur fluide sur tous les écrans.</li>
+        </ol>
+      </section>
+    </main>
+
     <footer>
-      <p>PolyDraw - Projet Python CIN2 S4</p>
+      <p>PolyDraw – Projet Python CIN2 S4</p>
     </footer>
   </body>
 </html>
