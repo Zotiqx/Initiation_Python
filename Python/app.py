@@ -57,6 +57,19 @@ def historique():
     )
     return render_template('historique.html', fichiers=fichiers)
 
+from flask import flash
+
+@app.route('/supprimer/<filename>', methods=['POST'])
+def supprimer(filename):
+    chemin = os.path.join('static', 'motifs', filename)
+    if os.path.exists(chemin):
+        os.remove(chemin)
+        flash(f"Motif {filename} supprimé.", "success")
+    else:
+        flash(f"Fichier {filename} introuvable.", "error")
+    return redirect(url_for('historique'))
+
+
 @app.route('/a-propos')
 def a_propos():
     return render_template('about.html')

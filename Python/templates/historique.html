@@ -5,7 +5,7 @@
     <title>Historique - PolyDraw</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='historique.css') }}" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}" />
   </head>
   <body>
     <nav>
@@ -29,7 +29,12 @@
             <div class="motif-block">
               <img src="{{ url_for('static', filename='motifs/' + f) }}" alt="{{ f }}" />
               <div class="motif-name" title="{{ f }}">{{ f }}</div>
-              <a href="{{ url_for('static', filename='motifs/' + f) }}" download class="download-button">Télécharger</a>
+              <div class="actions">
+                <a href="{{ url_for('static', filename='motifs/' + f) }}" download class="download-button" title="Télécharger">Télécharger</a>
+                <form action="{{ url_for('supprimer', filename=f) }}" method="POST" class="delete-form">
+                  <button type="submit" class="delete-button" title="Supprimer">🗑️</button>
+                </form>
+              </div>
             </div>
           {% endfor %}
         </div>
