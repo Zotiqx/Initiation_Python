@@ -5,7 +5,7 @@
     <title>PolyDraw - Générateur de motifs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='logo.png') }}" />
   </head>
   <body>
     <nav>
@@ -36,6 +36,12 @@
             <input type="text" name="couleur" placeholder="COULEUR" required />
             <input type="color" name="picker" value="#00ff00" onchange="document.querySelector('input[name=couleur]').value = this.value" />
           </div>
+
+          <select name="type_motif" required>
+            <option value="polygon">Polygone</option>
+              <option value="spiral">Spirale</option>
+              <option value="koch">Fractale </option>
+            </select>
 
           <button type="submit">[GÉNÉRER]</button>
         </form>
