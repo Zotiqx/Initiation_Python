@@ -1,5 +1,7 @@
 import os
-from flask import Flask, render_template, request, url_for, redirect, session
+import math
+import random
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 from motif_generator import generer_motif
 
 app = Flask(__name__)
@@ -13,7 +15,21 @@ def accueil():
 
 @app.route('/generateur', methods=['GET', 'POST'])
 def generateur():
+    # Contexte pour préremplissage
+    context = {
+        'nb_cotes':    '',
+        'repetition':  '',
+        'taille':      '',
+        'angle':       '',
+        'couleur':     '',
+        'type_motif':  'polygon',
+        'image_path':  None,
+        'generated_filename': None,
+        'error':       None
+    }
+
     if request.method == 'POST':
+        # Renommage
         if 'nom_fichier_existant' in request.form:
             ancien_nom = request.form['nom_fichier_existant']
             nouveau_nom = request.form['nom_nouveau'].strip()
@@ -22,30 +38,41 @@ def generateur():
                 ancien_chemin = os.path.join(dossier, ancien_nom)
                 nouveau_fichier = f"{nouveau_nom}.png"
                 nouveau_chemin = os.path.join(dossier, nouveau_fichier)
-                if os.path.exists(ancien_chemin):
+                try:
                     os.rename(ancien_chemin, nouveau_chemin)
-                    session['image_path'] = url_for('static', filename=f'motifs/{nouveau_fichier}')
-                    session['generated_filename'] = nouveau_fichier
-                    return redirect(url_for('generateur'))
-        else:
-            try:
-                nb_cotes = int(request.form['nb_cotes'])
-                profondeur = int(request.form['répétition'])
-                taille = int(request.form['taille'])
-                angle = float(request.form['angle'])
-                couleur = request.form['couleur']
-                type_motif = request.form.get('type_motif', 'polygon')
-                                              
-                filename = generer_motif(nb_cotes, profondeur, taille, angle, couleur, type_motif)
-                session['image_path'] = url_for('static', filename=f'motifs/{filename}')
-                session['generated_filename'] = filename
+                    flash(f"Motif renommé en {nouveau_fichier}", 'success')
+                except Exception as e:
+                    flash(f"Erreur renommage: {e}", 'error')
                 return redirect(url_for('generateur'))
-            except Exception as e:
-                return render_template('generateur.html', error=str(e))
 
-    image_path = session.pop('image_path', None)
-    generated_filename = session.pop('generated_filename', None)
-    return render_template('generateur.html', image_path=image_path, generated_filename=generated_filename)
+        # Randomize sans JS
+        if 'randomize' in request.form:
+            context.update({
+                'nb_cotes':   random.randint(3, 12),
+                'repetition': random.randint(5, 60),
+                'taille':     random.randint(20, 200),
+                'angle':      round(random.uniform(5, 90), 2),
+                'couleur':    "#{:06x}".format(random.randint(0, 0xFFFFFF)),
+                'type_motif': random.choice(['polygon', 'spiral', 'fractale']),
+            })
+            return render_template('generateur.html', **context)
+
+        # Génération de motif
+        try:
+            nb_cotes   = int(request.form['nb_cotes'])
+            repetition = int(request.form['repetition'])
+            taille     = int(request.form['taille'])
+            angle      = float(request.form['angle'])
+            couleur    = request.form['couleur']
+            type_motif = request.form.get('type_motif', 'polygon')
+
+            filename = generer_motif(nb_cotes, repetition, taille, angle, couleur, type_motif)
+            context['image_path']         = url_for('static', filename=f'motifs/{filename}')
+            context['generated_filename'] = filename
+        except Exception as e:
+            context['error'] = str(e)
+
+    return render_template('generateur.html', **context)
 
 @app.route('/historique')
 def historique():
@@ -57,18 +84,12 @@ def historique():
     )
     return render_template('historique.html', fichiers=fichiers)
 
-from flask import flash
-
 @app.route('/supprimer/<filename>', methods=['POST'])
 def supprimer(filename):
     chemin = os.path.join('static', 'motifs', filename)
     if os.path.exists(chemin):
         os.remove(chemin)
-        flash(f"Motif {filename} supprimé.", "success")
-    else:
-        flash(f"Fichier {filename} introuvable.", "error")
     return redirect(url_for('historique'))
-
 
 @app.route('/a-propos')
 def a_propos():
