@@ -28,10 +28,10 @@
 
       <section class="form-container">
         <form method="POST">
-          <input type="number" name="nb_cotes" placeholder="NOMBRE DE CÔTÉS" value="{{ nb_cotes }}" required />
-          <input type="number" name="repetition" placeholder="RÉPÉTITION" value="{{ repetition }}" required />
-          <input type="number" name="taille" placeholder="TAILLE" value="{{ taille }}" required />
-          <input type="number" step="any" name="angle" placeholder="ANGLE DE ROTATION" value="{{ angle }}" required />
+          <input type="number" name="nb_cotes" placeholder="NOMBRE DE CÔTÉS (1 - 100)" value="{{ nb_cotes }}" min="1" max="100" required />
+          <input type="number" name="repetition" placeholder="RÉPÉTITION (1 - 100)" value="{{ repetition }}" min="1" max="100" required />
+          <input type="number" name="taille" placeholder="TAILLE (1 - 300)" value="{{ taille }}" min="1" max="300" required />
+          <input type="number" step="any" name="angle" placeholder="ANGLE DE ROTATION (0 - 360)" value="{{ angle }}" min="0" max="360" required />
           <div class="color-inputs">
             <input type="text" name="couleur" placeholder="COULEUR" value="{{ couleur }}" required />
             <input type="color" value="{{ couleur or '#00ff00' }}" onchange="this.previousElementSibling.value = this.value" />

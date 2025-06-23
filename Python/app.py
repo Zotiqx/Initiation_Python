@@ -4,6 +4,12 @@ import random
 from flask import Flask, render_template, request, url_for, redirect, session, flash
 from motif_generator import generer_motif
 
+MAX_COTES               = 100
+MAX_REPETITION          = 100
+FRACTALE_MAX_REPETITION = 6
+MAX_TAILLE              = 300
+MAX_ANGLE               = 360
+
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'
 UPLOAD_FOLDER = 'static/motifs'
@@ -15,7 +21,6 @@ def accueil():
 
 @app.route('/generateur', methods=['GET', 'POST'])
 def generateur():
-    # Contexte pour préremplissage
     context = {
         'nb_cotes':    '',
         'repetition':  '',
@@ -29,35 +34,29 @@ def generateur():
     }
 
     if request.method == 'POST':
-        # Renommage
         if 'nom_fichier_existant' in request.form:
-            ancien_nom = request.form['nom_fichier_existant']
-            nouveau_nom = request.form['nom_nouveau'].strip()
-            if ancien_nom and nouveau_nom:
+            ancien = request.form['nom_fichier_existant']
+            nouveau = request.form['nom_nouveau'].strip()
+            if ancien and nouveau:
                 dossier = os.path.join('static', 'motifs')
-                ancien_chemin = os.path.join(dossier, ancien_nom)
-                nouveau_fichier = f"{nouveau_nom}.png"
-                nouveau_chemin = os.path.join(dossier, nouveau_fichier)
                 try:
-                    os.rename(ancien_chemin, nouveau_chemin)
-                    flash(f"Motif renommé en {nouveau_fichier}", 'success')
+                    os.rename(os.path.join(dossier, ancien), os.path.join(dossier, f"{nouveau}.png"))
+                    flash(f"Motif renommé en {nouveau}.png", 'success')
                 except Exception as e:
                     flash(f"Erreur renommage: {e}", 'error')
-                return redirect(url_for('generateur'))
+            return redirect(url_for('generateur'))
 
-        # Randomize sans JS
         if 'randomize' in request.form:
             context.update({
-                'nb_cotes':   random.randint(3, 12),
-                'repetition': random.randint(5, 60),
-                'taille':     random.randint(20, 200),
-                'angle':      round(random.uniform(5, 90), 2),
+                'nb_cotes':   random.randint(1, MAX_COTES),
+                'repetition': random.randint(1, MAX_REPETITION),
+                'taille':     random.randint(1, MAX_TAILLE),
+                'angle':      round(random.uniform(0, MAX_ANGLE), 2),
                 'couleur':    "#{:06x}".format(random.randint(0, 0xFFFFFF)),
                 'type_motif': random.choice(['polygon', 'spiral', 'fractale']),
             })
             return render_template('generateur.html', **context)
 
-        # Génération de motif
         try:
             nb_cotes   = int(request.form['nb_cotes'])
             repetition = int(request.form['repetition'])
@@ -66,9 +65,23 @@ def generateur():
             couleur    = request.form['couleur']
             type_motif = request.form.get('type_motif', 'polygon')
 
-            filename = generer_motif(nb_cotes, repetition, taille, angle, couleur, type_motif)
-            context['image_path']         = url_for('static', filename=f'motifs/{filename}')
-            context['generated_filename'] = filename
+            if not (1 <= nb_cotes <= MAX_COTES):
+                context['error'] = f"Nombre de côtés doit être entre 3 et {MAX_COTES}."
+            elif not (1 <= taille <= MAX_TAILLE):
+                context['error'] = f"Taille doit être entre 10 et {MAX_TAILLE}."
+            elif not (0 <= angle <= MAX_ANGLE):
+                context['error'] = f"Angle doit être entre 0° et {MAX_ANGLE}°."
+            else:
+                if type_motif == 'fractale' and repetition > FRACTALE_MAX_REPETITION:
+                    repetition = FRACTALE_MAX_REPETITION
+                if type_motif != 'fractale' and not (1 <= repetition <= MAX_REPETITION):
+                    context['error'] = f"Répétitions doit être entre 1 et {MAX_REPETITION}."
+
+            if context['error'] is None:
+                filename = generer_motif(nb_cotes, repetition, taille, angle, couleur, type_motif)
+                context['image_path']         = url_for('static', filename=f'motifs/{filename}')
+                context['generated_filename'] = filename
+
         except Exception as e:
             context['error'] = str(e)
 
@@ -87,8 +100,7 @@ def historique():
 @app.route('/supprimer/<filename>', methods=['POST'])
 def supprimer(filename):
     chemin = os.path.join('static', 'motifs', filename)
-    if os.path.exists(chemin):
-        os.remove(chemin)
+    if os.path.exists(chemin): os.remove(chemin)
     return redirect(url_for('historique'))
 
 @app.route('/a-propos')

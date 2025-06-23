@@ -136,7 +136,6 @@ footer {
   color: #33FF33;
 }
 
-
 @media (max-width: 768px) {
   nav {
     flex-direction: column;
