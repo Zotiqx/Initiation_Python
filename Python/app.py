@@ -7,11 +7,9 @@ app.secret_key = 'super_secret_key'
 UPLOAD_FOLDER = 'static/motifs'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-
 @app.route('/')
 def accueil():
     return render_template('accueil.html')
-
 
 @app.route('/generateur', methods=['GET', 'POST'])
 def generateur():
@@ -36,11 +34,12 @@ def generateur():
                 taille = int(request.form['taille'])
                 angle = float(request.form['angle'])
                 couleur = request.form['couleur']
-                filename = generer_motif(nb_cotes, profondeur, taille, angle, couleur)
+                type_motif = request.form.get('type_motif', 'polygon')
+                                              
+                filename = generer_motif(nb_cotes, profondeur, taille, angle, couleur, type_motif)
                 session['image_path'] = url_for('static', filename=f'motifs/{filename}')
                 session['generated_filename'] = filename
                 return redirect(url_for('generateur'))
-            
             except Exception as e:
                 return render_template('generateur.html', error=str(e))
 
@@ -57,7 +56,6 @@ def historique():
         reverse=True
     )
     return render_template('historique.html', fichiers=fichiers)
-
 
 @app.route('/a-propos')
 def a_propos():
